@@ -1,13 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :basic_auth, if: :production?
-<<<<<<< HEAD
-  before_action :configure_permitted_parameters, if: :devise_controller?
-=======
   protect_from_forgery with: :exception
   before_action :configre_permitted_parameters, if: :devise_controller?
   before_action :set_ancestry
 
->>>>>>> afecb3c32e036afce0ca42c55fbbdf12100a16b0
   private
   #ベイシック認証関連の設定
   def production?
@@ -28,18 +24,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:nickname, :first_name, :last_name, :first_name_kana, :last_name_kana,:birthday_year_id, :birthday_moon_id, :birthday_day_id])
   end
 
-<<<<<<< HEAD
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :first_name, :last_name, :first_name_kana, :last_name_kana, :birthday_year_id, :birthday_moon_id, :birthday_day_id])
-  end
-=======
   def set_ancestry
     @parents = Category.where(ancestry: nil)
   end
-
-end
->>>>>>> afecb3c32e036afce0ca42c55fbbdf12100a16b0
 
 end
