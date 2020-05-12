@@ -1,9 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-<<<<<<< HEAD
-=======
   before_action :configure_sign_up_params, only: [:create]
-
->>>>>>> afecb3c32e036afce0ca42c55fbbdf12100a16b0
 
   def new
     @user = User.new
@@ -17,10 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     session["devise.regist_data"] = {user: @user.attributes}
     session["devise.regist_data"][:user]["password"] = params[:user][:password]
-<<<<<<< HEAD
-=======
     session["devise.regist_data"][:user]["password_confirmation"] = params[:user][:password_confirmation]
->>>>>>> afecb3c32e036afce0ca42c55fbbdf12100a16b0
     @address = @user.build_address
     render :new_address
   end
@@ -33,17 +26,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render :new_address and return
     end
     @user.build_address(@address.attributes)
-<<<<<<< HEAD
-    @user.save
-    session["devise.regist_data"]["user"].clear
-    sign_in(:user, @user)
-  end
-
-protected
-
-  def address_params
-    params.require(:address).permit(:postal_code, :prefecture_code, :city_name, :street)
-=======
     if @user.save
       session["devise.regist_data"]["user"].clear
       sign_in(:user, @user)
@@ -126,6 +108,5 @@ protected
 
   def address_params
     params.require(:address).permit(:postal_code, :prefecture_code, :city_name, :street, :street2)
->>>>>>> afecb3c32e036afce0ca42c55fbbdf12100a16b0
   end
 end
