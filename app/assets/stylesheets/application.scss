@@ -1,29 +1,26 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
- @import "reset";
- @import "modules/items";
- @import "font-awesome-sprockets";
- @import "font-awesome";
- @import "color/color";
- @import "./mixin/clearfix";
- @import "sell/sell_header"; 
- @import "sell/sell_main";
- @import "sell/sell_footer";
- @import 'signup';
- @import 'users/signup-header';
- @import 'users/signup-footer';
- @import 'users/signup-main';
- 
+@import "reset";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "color/color";
+@import "./mixin/clearfix";
+@import "sell/index";
+@import "sell/header"; 
+@import "sell/new";
+@import "sell/footer";
+@import "sell/show";
+@import "sell/create";
+@import "sell/destroy";
+@import "sell/edit";
+@import "sell/error_message";
+@import "sell/purchase";
+@import "sell/done";
+@import "users/users_footer";
+@import "users/users_header";
+@import "users/users_main";
+@import "users/users_mypage";
+@import "users/users_mypage_signouts";
+@import "users/users_mypage_form";
+@import "users/users_mypage_address";
+@import "users/users_mypage_profile";
+@import "users/user_input";
+@import "cards";
