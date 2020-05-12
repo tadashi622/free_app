@@ -1,0 +1,26 @@
+= render "items/header"
+.header-under
+  .box-under
+    .gretel-link
+      - breadcrumb :card
+      = breadcrumbs separator:  "&rsaquo;",class: "crumb-btn"
+
+.wrraper
+  .mypage
+    = render 'users/side-bar'
+    .card__box
+      .card__box__head
+        %h2 支払い方法
+      .card__content
+        .card__content__textbox
+          %h3.card__content__textbox__text クレジットカード一覧
+        .set__card
+          .submit_button
+            = link_to  new_user_card_path(current_user.id),class: "btn-red" do
+              %i.far.fa-credit-card
+                クレジットカードを追加する
+        .set__regist
+          %a{:href => '#'}
+            %span 支払い方法について
+            %i.fas.fa-chevron-right
+= render 'items/footer'

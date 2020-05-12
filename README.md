@@ -20,40 +20,51 @@
 - has_many :items
 - has_many :comments
 - has_one :address
-- has_one :card
+- has_one :card 
+- has_many :sns_credentials
+- belongs_to_active_hash :birth_year
+- belongs_to_active_hash :birth_moom
+- belongs_to_active_hash :birth_day     
 
 
 ## itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false|
+|user_id|integer||
 |name|text|null: false| [](商品名)
-|content|string|-------| [](商品の説明)
-|price|string|null: false| [](商品の説明)
-|prefecture_code|integer(11)|null: false| [](発送元の地域)
-|status|integer(2)|null:false, default: 0| [](配送料の負担) 
-|deliverymethod|reference|null: false, foreign_key: true|
-|deliveryburden|reference|null: false, foreign_key: true|
-|deliverydate|reference|null: false, foreign_key: true|
-|brand|reference|null: false, foreign_key: true| [](ブランド)
-|upper_category|reference|null: false, foreign_key: true| [](カテゴリーupper)
-|middle_category|reference|null: false, foreign_key: true| [](カテゴリーmiddle)
-|lower_category|reference|null: false, foreign_key: true| [](カテゴリーlower)
-|size|reference|null: false, foreign_key: true| [](商品のサイズ)
-|seller|reference|null: false, foreign_key: true| [](販売価格)
+|content|string|null: false| [](商品の説明)
+|brand|string|| [](ブランド)
+|category|references|null: false, default: 0| [](カテゴリー)
+|condition|references|null: false| [](商品の状態)
+|size|references|null: false, default: 0| [](商品のサイズ)
+|delivery_date|references|null: false, default: 0| [](配送日)
+|delivery_fee|references|null: false, default: 0| [](配送料の負担)
+|prefecture|references|null: false, default: 0| [](発送元の地域)
+|delivery_way|references|null: false, default: 0| [](配送方法)
+|price|integer|null: false| [](販売価格)
+|buyer_id|integer|foreign_key: true|
 
 ### Association
-- has_many :comments
 - belongs_to :user
+- has_many :category
+- has_many :comments, dependent: :destroy
+- has_many :images, dependent: :destroy
+- accepts_nested_attributes_for :images, allow_destroy: true
+- belongs_to_active_hash :condition, resence: true 
+- belongs_to_active_hash :size, presence: true
+- belongs_to_active_hash :delivery_date, presence: true
+- belongs_to_active_hash :delivery_fee, presence: true
+- belongs_to_active_hash :prefecture, presence: true
+- belongs_to_active_hash :delivery_way, presence: true 
 
 
 ## Commentsテーブル(中間テーブル)
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null: false|
-|comment|text|null: false|
-|item|reference|null: false, foreign_key: true|
-|user|reference|null: false, foreign_key: true|
+|item|reference|null: false|
+|user|reference|null: false|
+|text|text|null: false|
 
 ### Association
 - belongs_to :user
@@ -63,8 +74,8 @@
 ## Cardsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false|
-|customer_id|integer|null: false|
+|user|references|null: false, foreign_key: true|
+|customer_id|string|null: false|
 |card_id|string|null: false|
 
 ## Association
@@ -82,3 +93,35 @@
 
 ## Association
 - belongs_to :user
+
+
+## categoryテーブル
+|Column|Type|Options|
+|------|----|-------|
+|item|references|| 
+|name|string|null: false| [](カテゴリー)
+
+## Association
+- has_many :items
+- has_ancestry
+
+
+## imagesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|src|string|| 
+|item_id|references|null: false|
+
+## Association
+- belongs_to :item
+- mount_uploader :src, ImageUploader
+
+
+## sns_credentialsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|provider|string||
+|uid|string||
+|user|references|foreign_key: true|
+### Association
+- belongs_to :user, optional: true, dependent: :destroy

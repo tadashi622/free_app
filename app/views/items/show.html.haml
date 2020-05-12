@@ -1,0 +1,141 @@
+-# 下記はメインヘッダー呼び出しに使用している
+= render "items/main-header"
+.product-main
+  .product-main__show
+    .top-content
+      .products-box
+        %h2.products-box__name
+          = @item.name
+        .products-box__images
+          %ul.top-list
+            %li.top-image
+              - @item.images.first(1).each do |item|
+                = image_tag item.src.url, class: 'top-icon'
+            %ul.sub-images
+              - @item.images[0..4].each do |item|
+                %li.sub-images--box
+                  = image_tag item.src.url, class: 'sub-icon' 
+        .products-box__price
+          .products-box__price__texts
+            .price-text ¥
+            .price-text
+              = @item.price
+          .products-box__price__detail
+            %span (税込)
+            %span 送料込み
+        .products-box__detail
+          = @item.content
+        .products-box__info
+          %table
+            %tbody
+              %tr
+                %th 出品者
+                %td
+                  = @item.user.nickname
+              %tr
+                %th カテゴリー
+                %td.category-text
+                  - @parents.each do |parent|
+                    - if @item.category_id == parent.id
+                      = link_to "#" do
+                        = parent.parent.parent.name
+                        %br
+                      = link_to "#" do
+                        = parent.parent.name
+                        %br
+                      = link_to "#" do
+                        = parent.name
+                     
+
+
+              %tr
+                %th ブランド
+                %td
+                  = @item.brand
+              %tr
+                %th 商品のサイズ
+                %td
+                  = @item.size.value
+              %tr
+                %th 商品の状態
+                %td
+                  = @item.condition.value
+              %tr
+                %th 配送料の負担
+                %td
+                  = @item.delivery_fee.value
+              %tr
+                %th 発送元の地域
+                %td
+                  = link_to "#" do
+                    = @item.prefecture.name
+              %tr
+                %th 発送日の目安
+                %td
+                  = @item.delivery_date.value
+        .products-box__option
+          .favorite
+          .optional
+            .optional__btn
+              = link_to "#", class: "optional__btn__link" do
+                = icon('fas', 'flag', class: 'image-icon') 
+                不適切な商品の通報
+                
+        .comments-box
+          .message-box
+            -if @comments 
+              -@comments.each do |comment|
+                .comments-box__message
+                  .comments-box__message__items
+                    .comments-box__message__items__user
+                      .comments-box__message__items__user__name
+                        = comment.user.nickname
+                    .comments-box__message__items__body
+                      = comment.text
+                      .comments-box__message__items__body__icons
+                        .comments-box__message__items__body__icons__left
+                          = icon('fas', 'history')
+                          %span
+                            = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+                        .comments-box__message__items__body__icons__right
+                          .message-delete
+                            = link_to "/items/#{@item.id}/comments/#{comment.id}", method:"delete", id: :delete_btn do
+                              = icon('fas', 'trash')
+
+          -if current_user
+            .caution-area
+              %p
+                相手のことを考え丁寧なコメントを心がけましょう。
+              %p
+                不快な言葉遣いなどは利用制限や退会処分となることがあります。
+            = form_for [@item, @comment], html: { id: :new_comment } do |f|
+              = f.text_area :text, placeholder: "コメントして下さい",class: "comment-area"
+              .comment-btn
+                = f.submit "コメントする", class: "comment-btn__submit"
+
+        - if user_signed_in? && current_user.id == @item.user_id   
+          .edit-btn
+            = link_to "編集", edit_item_path(@item.id), class:"edit-btn__text"
+          .delete-btn
+            = link_to '削除する', item_path, method: :delete, class:"delete-btn__text"
+        - elsif user_signed_in?
+          -if @item.buyer_id.present?
+            .purchase-btn-red
+              .purchase-btn-red__text
+                Sold out 
+          - else
+            .purchase-btn
+              = link_to "購入する", purchase_items_path, class:"purchase-btn__text"
+      .product-links
+        .product-links__before
+          = link_to "#", class: "product-link-btn" do
+            = icon('fas', 'angle-left', class: 'image-icon')
+            %span 前の商品
+        .product-links__after
+          = link_to "#", class: "product-link-btn" do
+            %span 後ろの商品
+            = icon('fas', 'angle-right', class: 'image-icon')
+      .see-more
+        = link_to  'メンズをもっと見る', "#"
+  = render "items/main-footer"
+-# 上記はメインフッター呼び出しに使用している

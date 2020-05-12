@@ -46,6 +46,9 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
   gem 'capistrano-rails-console'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 group :production do
@@ -72,9 +75,22 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'listen'
-gem "haml-rails"
-gem 'devise'
-gem 'pry-rails'
-gem 'font-awesome-sass'
-gem 'active_hash'
-gem "carrierewave"
+gem "haml-rails" #htmlをhamlにする為、記述した
+gem 'devise' #ユーザー
+gem 'payjp' #クレジットカード
+gem 'dotenv-rails' #.envの生成
+gem 'pry-rails' #binding.pry
+gem 'omniauth-facebook' #facebook
+gem 'omniauth-google-oauth2' #google
+gem "omniauth-rails_csrf_protection" #sns
+gem 'font-awesome-sass' #アイコンの画像を挿入する為、記述した
+gem 'carrierwave' #画像を保存する為に導入した
+gem 'mini_magick' #画像を保存する為に導入した
+gem 'jquery-rails' #JSを起動させる為に導入した
+gem 'ancestry' #カテゴリーを作成する為、導入した
+gem 'active_hash' #item、deviseの登録、出品画面で使用した。(各モデルに呼び出す値を記述した)
+gem 'rails-i18n' #config/locales内にある〇〇.ja.ymlを起動させる為、導入した。(config/application.rbにconfig.i18n.default_locale = :jaを記載)
+gem 'jquery-turbolinks'  #jsがリロードしないと起動しない為、このgemを導入した。これによりページ遷移後、JSが起動する。
+gem 'fog-aws' #画像をアップロードする際、外部のストレージを選択しアップロードするのを補助してくれるGem
+gem 'kaminari' #ページがいっぱいになると自動的に分けてくれる
+gem 'gretel' #パンくず機能

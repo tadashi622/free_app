@@ -1,36 +1,44 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      %br/
-      %em
-        = @minimum_password_length
-        characters minimum
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+= render "items/main-header"
+.header-under
+  .box-under
+    .gretel-link
+      - breadcrumb :edit_mail
+      = breadcrumbs separator:  "&rsaquo;",class: "crumb-btn"
+.wrraper
+  .mypage
+    = render 'users/side-bar'
+    .edit-email
+      .edit-email-group
+        .edit-email-title
+          メール/パスワード
+        .edit-email-form
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: :edit_form } ) do |f|
+            .email
+              = f.label :email, "メールアドレス"
+              .email-group
+                = f.text_field :email,placeholder: "PC・携帯どちらでも可",class: "email-field",id: "email"
+              .email-content
+                メールアドレスを変更すると確認メールが送信されます。
+                メール内のURLをクリックすると変更完了です。
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              %div
+                Currently waiting confirmation for: #{resource.unconfirmed_email}
+            .current-pass
+              = f.label :current_password, "現在のパスワード"
+              %br/
+              .current-pass-group
+                = f.password_field :current_password, autocomplete: "current_password",class: "current-pass-field",id: "now-pass"
+            .new-pass
+              = f.label :password, "新しいのパスワード"
+              %br/
+              .new-pass-group
+                = f.password_field :password, autocomplete: "password",placeholder: "7文字以上の半角英数字",class: "new-pass-field",id: "pass"
+            .new-pass-two
+              = f.label :password_confirmation, "新しいのパスワード確認"
+              %br/
+              .pass-tow-group
+                = f.password_field :password_confirmation, autocomplete: "password_confirmation",placeholder: "新しいパスワード再入力",class: "new-pass-two-field",id: "pass-two"
+            .send
+              = f.submit "変更する",class: "send-btn"
+= render 'items/main-footer'
+
