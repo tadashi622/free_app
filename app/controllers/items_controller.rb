@@ -1,10 +1,7 @@
 class ItemsController < ApplicationController
-<<<<<<< HEAD
-=======
   before_action :set_product, only: [:edit, :show, :update, :destroy, :purchase, :pay, :done]
   before_action :set_card, only: [:purchase, :pay, :done]
 
->>>>>>> afecb3c32e036afce0ca42c55fbbdf12100a16b0
   def index
     @items = Item.all
   end
