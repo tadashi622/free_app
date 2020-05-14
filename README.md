@@ -32,7 +32,7 @@
 - Trelloによるタスク管理
 
 # 担当箇所一覧と確認方法
-- 商品購入
+## 商品購入
 ![buy](https://user-images.githubusercontent.com/62418207/81949291-a5612500-963d-11ea-9799-dc657a792153.gif)
 - ユーザー関連
 - マイページ
