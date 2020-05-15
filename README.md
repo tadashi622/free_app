@@ -36,7 +36,8 @@
 ![buy](https://user-images.githubusercontent.com/62418207/82053047-a5256000-96f7-11ea-8812-424a10832def.gif)
 ## ユーザー関連
 ![login](https://user-images.githubusercontent.com/62418207/82029010-51a01b80-96d1-11ea-9cea-f6960fe922d6.gif)
-- マイページ
+## マイページ
+![my](https://user-images.githubusercontent.com/62418207/82067094-35b96b80-970b-11ea-8468-dd710a5a3914.gif)
 # 各担当箇所の詳細
 - payjpを使用しクレジットカードの登録、削除、商品購入
 - ウィザード形式を使用しユーザーの個人情報の新規登録、削除、編集
