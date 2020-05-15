@@ -33,7 +33,7 @@
 
 # 担当箇所一覧と確認方法
 ## 商品購入
-![buy](https://user-images.githubusercontent.com/62418207/81949291-a5612500-963d-11ea-9799-dc657a792153.gif)
+![buy](https://user-images.githubusercontent.com/62418207/82053047-a5256000-96f7-11ea-8812-424a10832def.gif)
 ## ユーザー関連
 ![login](https://user-images.githubusercontent.com/62418207/82029010-51a01b80-96d1-11ea-9cea-f6960fe922d6.gif)
 - マイページ
